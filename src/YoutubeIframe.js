@@ -114,9 +114,13 @@ const YoutubeIframe = (props, ref) => {
         );
       },
       playNextVideo: () => {
-        console.log('YoutubeIframe.js playNextVideo');
         webViewRef.current.injectJavaScript(
           PLAYER_FUNCTIONS.playNextVideo(),
+        );
+      },
+      playPreviousVideo: () => {
+        webViewRef.current.injectJavaScript(
+          PLAYER_FUNCTIONS.playPreviousVideo(),
         );
       },
     }),

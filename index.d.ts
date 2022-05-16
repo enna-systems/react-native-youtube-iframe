@@ -28,6 +28,7 @@ export interface YoutubeIframeRef {
   getAvailablePlaybackRates: () => Promise<number[]>;
   seekTo: (seconds: number, allowSeekAhead: boolean) => void;
   playNextVideo: () => void;
+  playPreviousVideo: () => void;
 }
 
 export interface InitialPlayerParams {

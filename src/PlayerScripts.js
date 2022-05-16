@@ -71,7 +71,7 @@ true;
   },
 
   playPreviousVideo: () => {
-    return `player.previousVideo();`;
+    return `player.previousVideo(); true;`;
   }
 };
 
