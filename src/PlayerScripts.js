@@ -1,4 +1,4 @@
-import { MUTE_MODE, PAUSE_MODE, PLAY_MODE, UNMUTE_MODE } from './constants';
+import {MUTE_MODE, PAUSE_MODE, PLAY_MODE, UNMUTE_MODE} from './constants';
 
 export const PLAYER_FUNCTIONS = {
   muteVideo: 'player.mute(); true;',
@@ -72,7 +72,7 @@ true;
 
   playPreviousVideo: () => {
     return `player.previousVideo(); true;`;
-  }
+  },
 };
 
 export const playMode = {
@@ -266,5 +266,5 @@ export const MAIN_SCRIPT = (
 </html>
 `;
 
-  return { htmlString, urlEncodedJSON };
+  return {htmlString, urlEncodedJSON};
 };
