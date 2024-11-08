@@ -42,7 +42,11 @@ export interface InitialPlayerParams {
   preventFullScreen?: boolean;
   playerLang?: String;
   iv_load_policy?: Number;
-  modestbranding?: boolean;
+  /** 
+   * @deprecated - This parameter has no effect since August 15, 2023
+   * https://developers.google.com/youtube/player_parameters#modestbranding
+   */
+  deprecated?: boolean;
   rel?: boolean;
 }
 
@@ -87,6 +91,10 @@ export interface YoutubeIframeProps {
    */
   volume?: number;
   /**
+   * A style prop that will be given to the webview container
+   */
+  viewContainerStyle?: StyleProp<ViewStyle>;
+  /**
    * A style prop that will be given to the webview
    */
   webViewStyle?: StyleProp<ViewStyle>;
@@ -120,7 +128,7 @@ export interface YoutubeIframeProps {
   /**
    * callback for when the player's state changes.
    */
-  onChangeState?: (event: string) => void;
+  onChangeState?: (event: PLAYER_STATES) => void;
   /**
    * callback for when the fullscreen option is clicked in the player. It signals the new fullscreen state of the player.
    */
