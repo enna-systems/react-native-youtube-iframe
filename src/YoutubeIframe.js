@@ -16,12 +16,7 @@ import {
   DEFAULT_BASE_URL,
   CUSTOM_USER_AGENT,
 } from './constants';
-import {
-  playMode,
-  soundMode,
-  MAIN_SCRIPT,
-  PLAYER_FUNCTIONS,
-} from './PlayerScripts';
+import {MAIN_SCRIPT, PLAYER_FUNCTIONS} from './PlayerScripts';
 import {deepComparePlayList} from './utils';
 
 const YoutubeIframe = (props, ref) => {
@@ -59,6 +54,18 @@ const YoutubeIframe = (props, ref) => {
 
   const webViewRef = useRef(null);
   const eventEmitter = useRef(new EventEmitter());
+
+  const sendPostMessage = useCallback(
+    (eventName, meta) => {
+      if (!playerReady) {
+        return;
+      }
+
+      const message = JSON.stringify({eventName, meta});
+      webViewRef.current.postMessage(message);
+    },
+    [playerReady],
+  );
 
   useImperativeHandle(
     ref,
@@ -127,18 +134,28 @@ const YoutubeIframe = (props, ref) => {
   );
 
   useEffect(() => {
-    if (!playerReady) {
-      // no instance of player is ready
-      return;
+    if (play) {
+      sendPostMessage('playVideo', {});
+    } else {
+      sendPostMessage('pauseVideo', {});
     }
+  }, [play, sendPostMessage]);
 
-    [
-      playMode[play],
-      soundMode[mute],
-      PLAYER_FUNCTIONS.setVolume(volume),
-      PLAYER_FUNCTIONS.setPlaybackRate(playbackRate),
-    ].forEach(webViewRef.current.injectJavaScript);
-  }, [play, mute, volume, playbackRate, playerReady]);
+  useEffect(() => {
+    if (mute) {
+      sendPostMessage('muteVideo', {});
+    } else {
+      sendPostMessage('unMuteVideo', {});
+    }
+  }, [mute, sendPostMessage]);
+
+  useEffect(() => {
+    sendPostMessage('setVolume', {volume});
+  }, [sendPostMessage, volume]);
+
+  useEffect(() => {
+    sendPostMessage('setPlaybackRate', {playbackRate});
+  }, [sendPostMessage, playbackRate]);
 
   useEffect(() => {
     if (!playerReady || lastVideoIdRef.current === videoId) {

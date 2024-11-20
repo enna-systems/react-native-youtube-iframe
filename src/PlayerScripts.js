@@ -261,6 +261,34 @@ export const MAIN_SCRIPT = (
       document.addEventListener('mozfullscreenchange', onFullScreenChange)
       document.addEventListener('msfullscreenchange', onFullScreenChange)
       document.addEventListener('webkitfullscreenchange', onFullScreenChange)
+
+      window.addEventListener('message', function (event) {
+        const {data} = event;
+
+        try {
+          const parsedData = JSON.parse(data);
+
+          switch (parsedData.eventName) {
+            case 'playVideo':
+              player.playVideo();
+              break;
+
+            case 'pauseVideo':
+              player.pauseVideo();
+              break;
+
+            case 'muteVideo':
+              player.mute();
+              break;
+
+            case 'unMuteVideo':
+              player.unMute();
+              break;
+          }
+        } catch (error) {
+          console.error('Error parsing data', event, error);
+        }
+      });
     </script>
   </body>
 </html>
