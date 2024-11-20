@@ -1,3 +1,7 @@
+## enna annotations
+
+We hosted the iframe_v2.html on our own server and set 'baseUrlOverride' property to avoid playing ads.
+
 # React Native Youtube iframe
 
 ![npm](https://img.shields.io/npm/v/react-native-youtube-iframe?style=for-the-badge) ![npm](https://img.shields.io/npm/dm/react-native-youtube-iframe?style=for-the-badge)
