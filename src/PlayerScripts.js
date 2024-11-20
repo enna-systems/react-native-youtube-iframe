@@ -198,27 +198,37 @@ export const MAIN_SCRIPT = (
       var player;
       function onYouTubeIframeAPIReady() {
         player = new YT.Player('player', {
-          width: '1000',
-          height: '1000',
+          width: '100%',
+          height: '100%',
           videoId: '${videoId_s}',
           playerVars: {
             ${listParam}
             ${listTypeParam}
             ${playlistParam}
 
-            end: ${end},
-            rel: ${rel_s},
-            playsinline: 1,
-            loop: ${loop_s},
-            color: ${color},
-            start: ${start},
-            hl: ${playerLang},
-            controls: ${controls_s},
-            fs: ${preventFullScreen_s},
-            cc_lang_pref: '${cc_lang_pref_s}',
-            iv_load_policy: ${iv_load_policy},
-            modestbranding: ${modestbranding_s},
-            cc_load_policy: ${showClosedCaptions_s},
+            // end: ${end},
+            // rel: ${rel_s},
+            // playsinline: 1,
+            // loop: ${loop_s},
+            // color: ${color},
+            // start: ${start},
+            // hl: ${playerLang},
+            // controls: ${controls_s},
+            // fs: ${preventFullScreen_s},
+            // cc_lang_pref: '${cc_lang_pref_s}',
+            // iv_load_policy: ${iv_load_policy},
+            // modestbranding: ${modestbranding_s},
+            // cc_load_policy: ${showClosedCaptions_s},
+            // try to hide commercials with copying params from chromecast-receiver
+            autoplay: 0,
+            autohide: 1,
+            controls: 0,
+            enablejsapi: 1,
+            fs: 0,
+            origin: 'https://www.youtube.com',
+            rel: 0,
+            showinfo: 0,
+            iv_load_policy: 3,
           },
           events: {
             'onReady': onPlayerReady,
